@@ -9,19 +9,15 @@ import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
-public class ItemController {
+public class NotificController {
+  private final NotificRepository notificRepository;
 
-  private final ItemRepository itemRepositry;
+  @GetMapping("/notification")
+  String notification(Model model){
+    List<Notification> result = notificRepository.findAll();
 
-  @GetMapping("/list")
-  String list(Model model){
-    List<Item> result = itemRepositry.findAll();
-    System.out.println(result.get(0).title);
-    var a = new Item();
-    System.out.println(a);
-
-
+    System.out.println(result.get(0).date);
     model.addAttribute("items", result);
-    return "list.html";
+    return "notification.html";
   }
 }
