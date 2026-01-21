@@ -16,6 +16,7 @@ import java.util.Optional;
 public class ItemController {
 
   private final ItemRepository itemRepository;
+  private final ItemService itemService;
 
   @GetMapping("/list")
   String list(Model model){
@@ -40,15 +41,14 @@ public class ItemController {
   String addPost(@RequestParam Map<String, String> formData){
     String title = (String) formData.get("title");
     Integer price = Integer.valueOf((String) formData.get("price"));
-
     System.out.println(title);
     System.out.println(price);
-    Item item = new Item();
-    item.setTitle(title);
-    item.setPrice(price);
-    itemRepository.save(item);
+
+    itemService.saveItem(title,price);
+
     return "redirect:/list";
   }
+
 //  @PostMapping("/add") //참고
 //  String addPost(@ModelAttribute Item item){
 //    itemRepository.save(item);
