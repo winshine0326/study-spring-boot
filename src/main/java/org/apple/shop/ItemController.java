@@ -20,14 +20,9 @@ public class ItemController {
 
   @GetMapping("/list")
   String list(Model model){
-    List<Item> result = itemRepository.findAll();
+
+    List<Item> result = itemService.getItemList();
 //    System.out.println(result.get(0).getTitle());
-    var a = new Item();
-//    System.out.println(a);
-
-    a.setTitle("adsf");
-//    System.out.println(a);
-
     model.addAttribute("items", result);
     return "list.html";
   }
@@ -41,8 +36,8 @@ public class ItemController {
   String addPost(@RequestParam Map<String, String> formData){
     String title = (String) formData.get("title");
     Integer price = Integer.valueOf((String) formData.get("price"));
-    System.out.println(title);
-    System.out.println(price);
+//    System.out.println(title);
+//    System.out.println(price);
 
     itemService.saveItem(title,price);
 
@@ -73,8 +68,8 @@ public class ItemController {
 //    } // try catch 사용
 
   @GetMapping("/detail/{id}")
-  String detail(@PathVariable Integer id, Model model){
-      Optional<Item> result = itemRepository.findById(id.longValue());
+  String detail(@PathVariable Long id, Model model){
+    Optional<Item> result = itemService.getItem(id);
       if (result.isPresent()){
         model.addAttribute("item", result.get());
         return "detail.html";
