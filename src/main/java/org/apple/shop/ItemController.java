@@ -1,6 +1,8 @@
 package org.apple.shop;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -53,16 +55,36 @@ public class ItemController {
 //    return "redirect:/list";
 //  }
 
+//  @GetMapping("/detail/{id}")
+//  String detail(@PathVariable Integer id, Model model){
+//
+//    try{
+//      Optional<Item> result = itemRepository.findById(id.longValue());
+//      if (result.isPresent()){
+//        model.addAttribute("item", result.get());
+//        return "detail.html";
+//      }else{
+//        return "redirect:/list";
+//      }
+//    } catch(Exception e){
+//      System.out.println(e.getMessage()); // login Library 추천
+////      return ResponseEntity.status(HttpStatus.NOT_FOUND).body("니잘못임"); // REST API 개발 시
+//      return "redirect:/list";
+//    } // try catch 사용
+
   @GetMapping("/detail/{id}")
   String detail(@PathVariable Integer id, Model model){
-
-    Optional<Item> result = itemRepository.findById(id.longValue());
-    if (result.isPresent()){
-      model.addAttribute("item", result.get());
-      return "detail.html";
-    }else{
-      return "redirect:/list";
-    }
-
+      Optional<Item> result = itemRepository.findById(id.longValue());
+      if (result.isPresent()){
+        model.addAttribute("item", result.get());
+        return "detail.html";
+      }else{
+        return "redirect:/list";
+      }
   }
+
+//  @ExceptionHandler(Exception.class)
+//  public void handler(){
+//    return ResponseEntity.status().body();
+//  } // controller 안에 모든 api에서 error가 나면 실행(REST API 만들 떄 편함)
 }
