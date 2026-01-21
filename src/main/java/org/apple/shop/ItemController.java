@@ -57,9 +57,12 @@ public class ItemController {
   String detail(@PathVariable Integer id, Model model){
 
     Optional<Item> result = itemRepository.findById(id.longValue());
-    result.ifPresent(System.out::println);
+    if (result.isPresent()){
+      model.addAttribute("item", result.get());
+      return "detail.html";
+    }else{
+      return "redirect:/list";
+    }
 
-    model.addAttribute("item", result.get());
-    return "detail.html";
   }
 }
