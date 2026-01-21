@@ -6,7 +6,7 @@
   <link href="/main.css" rel="stylesheet">
 </head>
 <body>
-
+<div th:replace="~{nav.html::navbar}"></div>
 <form action="/add" method="post">
   <input name="title" placeholder="이름">
   <input name="price" placeholder="가격">
