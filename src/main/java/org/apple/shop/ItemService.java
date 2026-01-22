@@ -2,12 +2,13 @@ package org.apple.shop;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
 
 @Service
-@RequiredArgsConstructor
+@RequiredArgsConstructor @Transactional
 public class ItemService {
 
   private final ItemRepository itemRepository;
@@ -28,4 +29,15 @@ public class ItemService {
     return itemRepository.findById(id);
   }
 
+  public void editItem(Long id, String title, Integer price){
+    Optional<Item> optionalItem = itemRepository.findById(id);
+    if(optionalItem.isPresent()){
+      Item item = optionalItem.get();
+      item.setTitle(title);
+      item.setPrice(price);
+      itemRepository.save(item);
+    } else{
+      System.out.println("에러남;;");
+    }
+  }
 }

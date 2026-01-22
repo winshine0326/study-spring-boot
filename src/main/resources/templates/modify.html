@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="/main.css" rel="stylesheet">
+</head>
+<body>
+<div th:replace="~{nav.html::navbar}"></div>
+<h4>상품 수정</h4>
+<form action="/edit" method="post">
+    <input type="hidden" name="_method" value="PUT">
+    <input type="hidden" name="id" th:value="${item.id}">
+    <input name="title" placeholder="이름" th:value="${item.title}">
+    <input name="price" placeholder="가격" th:value="${item.price}">
+    <button type="submit">전송</button>
+</form>
+
+</body>
+</html>

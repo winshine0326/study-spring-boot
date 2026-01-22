@@ -78,6 +78,27 @@ public class ItemController {
       }
   }
 
+  @GetMapping("/modify/{id}")
+  String modify(@PathVariable Long id, Model model){
+    Optional<Item> result = itemService.getItem(id);
+    if(result.isPresent()) {
+      model.addAttribute("item",result.get());
+      return "modify.html";
+    }else{
+      return "redirect:/list";
+    }
+  }
+
+  @PutMapping("/edit")
+  String edit(@RequestParam Map<String, String> formData){
+    Long id = Long.valueOf(formData.get("id"));
+    String title = formData.get("title");
+    Integer price = Integer.parseInt(formData.get("price"));
+
+    itemService.editItem(id, title, price);
+    return "redirect:/list";
+  }
+
 //  @ExceptionHandler(Exception.class)
 //  public void handler(){
 //    return ResponseEntity.status().body();
