@@ -40,4 +40,14 @@ public class ItemService {
       System.out.println("에러남;;");
     }
   }
+
+  public void deleteItem(Long id){
+    Optional<Item> optionalItem = itemRepository.findById(id);
+    if(optionalItem.isPresent()){
+      Item item = optionalItem.get();
+      itemRepository.delete(item);
+    }else{
+      System.out.println("잘못보내심;;");
+    }
+  }
 }

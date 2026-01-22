@@ -1,6 +1,7 @@
 package org.apple.shop.item;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -95,6 +96,12 @@ public class ItemController {
 
     itemService.editItem(id, title, price);
     return "redirect:/list";
+  }
+
+  @DeleteMapping("/delete/{id}")
+  ResponseEntity<Void> delete(@PathVariable Long id){
+    itemService.deleteItem(id);
+    return ResponseEntity.ok().build();
   }
 
 //  @ExceptionHandler(Exception.class)

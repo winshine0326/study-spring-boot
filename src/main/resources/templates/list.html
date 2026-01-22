@@ -18,7 +18,20 @@
             <a th:href="@{/modify/{id}(id = ${i.id})}">
                 <p>수정</p>
             </a>
+            <button th:onclick="|handleDelete('${i.id}')|">삭제</button>
         </div>
     </div>
+
+    <script>
+        function handleDelete(id){
+            fetch(`/delete/${id}`, {method:"DELETE"}).then(response=>{
+                if(response.ok){
+                    window.location.href='list';
+                } else{
+                    alert("삭제 에러;;");
+                }
+            }).catch(error=>console.log("에러남;;"));
+        }
+    </script>
 </body>
 </html>
