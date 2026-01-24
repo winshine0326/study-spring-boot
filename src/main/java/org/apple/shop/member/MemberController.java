@@ -18,7 +18,7 @@ public class MemberController {
     return("/register");
   }
 
-  @PostMapping("/adduser")
+  @PostMapping("/add-user")
   String adduser(@RequestParam Map<String, String> formData){
     String username = formData.get("username");
     String password = formData.get("password");
